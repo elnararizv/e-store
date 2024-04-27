@@ -1,11 +1,12 @@
-const add_btn = document.querySelectorAll('.add');
-const del_btn = document.querySelectorAll('.del');
-const sum_price = document.querySelector('.price');
-const totalEl = document.querySelector('.total');
+const add_btn = document.querySelectorAll('.add')
+const del_btn = document.querySelectorAll('.del')
+const sum_price = document.querySelector('.price')
+const totalEl = document.querySelector('.total')
 let input = document.querySelector('.inp')
 let prdctName = document.querySelector('.card-title')
 let cartItem=document.querySelector('.cartItem')
 let cart=document.querySelector('#cart')
+
 
 cart.addEventListener('click',function(){
     document.querySelector('.shop').style.display="none"
@@ -67,7 +68,7 @@ add_btn.forEach((b) => {
     });
 
     function prdctPrice(a, b) {
-        console.log(a * b);
+        console.log(a * b)
     }
 
     function totalPrice() {
@@ -75,7 +76,7 @@ add_btn.forEach((b) => {
         for (let key in obj) {
             total += obj[key].quantity * obj[key].price;
         }
-        totalEl.innerText = total;
+        totalEl.innerText = total
     }
 
     totalPrice();
@@ -93,7 +94,8 @@ add_btn.forEach((b) => {
     })
 
     function addCart(name) {
-        const cartProducts = document.querySelectorAll('.cartItem h4');
+        const cartProducts = document.querySelectorAll('.name');
+        console.log(cartProducts)
         for (let i = 0; i < cartProducts.length; i++) {
             if (cartProducts[i].textContent === name) {
                 const quantityElement = cartProducts[i].nextElementSibling.nextElementSibling;
@@ -104,14 +106,14 @@ add_btn.forEach((b) => {
         }
         cartItem.innerHTML += `
         <div class="border border-dark rounded text-center mx-2 p-2 fw-bold" style="width: 20%;background-color: rgba(35, 35, 216, 0.5);">
-        <h4>${name}</h4>
+        <h4 class="name">${name}</h4>
         <p>Price: ${obj[name].price}$</p>
         <p>Count: ${obj[name].quantity}</p>
     </div>`;
     }
     
     function removeCart(name) {
-        const cartProducts = document.querySelectorAll('.cartItem h4');
+        const cartProducts = document.querySelectorAll('.name');
         for (let i = 0; i < cartProducts.length; i++) {
             if (cartProducts[i].textContent === name) {
                 const quantityElement = cartProducts[i].nextElementSibling.nextElementSibling;
@@ -124,10 +126,33 @@ add_btn.forEach((b) => {
             }
         }
     }
-
-    
-    
-    
-    
-   
  
+    
+let buttons = document.querySelectorAll('.btn-outline-dark');
+let cards = document.querySelectorAll('.card');
+document.addEventListener("DOMContentLoaded", function() {
+    buttons[0].click();
+});
+    
+buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+        btn.classList.add('active');
+        let start = (parseInt(btn.textContent) - 1) * 3;
+        cards.forEach(function(card, ind) {
+            if (ind >= start && ind < start + 3) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+});
+
+
+
+
+
+
